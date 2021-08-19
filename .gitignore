@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/MTG_App/.vs/MTG_App/v16
+/MTG_App/MTG_App/obj/Debug
+/MTG_App/packages
+/MTG_App/MTG_Library/bin/Debug/net5.0
+/MTG_App/MTG_App/bin
+/MTG_App/MTG_App/obj/Release
+/MTG_App/MTG_Library/bin
+/MTG_App/MTG_Library/obj

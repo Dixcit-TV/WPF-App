@@ -1,0 +1,56 @@
+﻿<Page x:Class="MTG_App.View.CardListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MTG_App.View"
+      xmlns:mtgApp="clr-namespace:MTG_App"
+      xmlns:vm="clr-namespace:MTG_App.ViewModel"
+      xmlns:ts="clr-namespace:MTG_App.View.TemplateSelector"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CardListPage">
+    <Page.DataContext>
+        <vm:CardListViewModel />
+    </Page.DataContext>
+    <Page.Resources>
+        <DataTemplate x:Key="Card_NoImage">
+            <Grid Width="200" Name="CardDisplay">
+                <Image Source="../Resources/Images/card_back.jpg"/>
+                <TextBlock Text="{Binding Name}" FontSize="24" Foreground="AliceBlue" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Background="#70050505"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="Card_ImageAvailable">
+            <Image Source="{Binding ImageUrl}" Width="200" Name="CardDisplay"/> 
+        </DataTemplate>
+        <ts:CardImageTemplateSelector x:Key="CardImageTemplateSelector"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20, 0, 0, 0">
+            <TextBlock Text="Result count: " Foreground="White" FontSize="20"/>
+            <TextBlock Text="{Binding Cards.Count, FallbackValue=0, TargetNullValue=0 }" Foreground="White" FontSize="20"/>
+            <TextBlock Text=" / 100" Foreground="White" FontSize="20"/>
+        </StackPanel>
+        <ListBox Grid.Column="0" Grid.Row="1" x:Name="CardListBox" ItemsSource="{Binding Cards}" ItemTemplateSelector="{StaticResource CardImageTemplateSelector}" BorderBrush="Transparent" Background="Transparent">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding CardSelectedCommand}"
+                                           CommandParameter="{Binding SelectedItem, ElementName=CardListBox}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel MaxHeight="{Binding ActualHeight, Mode=OneWay, 
+                       RelativeSource={RelativeSource FindAncestor, 
+                       AncestorType={x:Type local:CardListPage}}}" 
+                               Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</Page>

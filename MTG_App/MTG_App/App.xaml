@@ -1,0 +1,10 @@
+﻿<Application x:Class="MTG_App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MTG_App"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush  x:Key="ContentTransparentBackground" Color="#A0696969"/>
+        <SolidColorBrush  x:Key="ContentTransparentBorder" Color="#A5A9A9A9"/>
+    </Application.Resources>
+</Application>
